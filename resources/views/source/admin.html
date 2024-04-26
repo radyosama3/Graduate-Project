@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/Admin.css">
+</head>
+<body>
+    <div class="header d-flex justify-content-end ">
+       
+        <h4 class="p-3">Admin</h4>
+        <i class="fa-solid fa-user-tie p-3" ></i>
+    </div>
+    <nav>
+        <div class="navbar mb-3  ps-4">
+            
+            <header >
+                <div class="container-fluid  con">
+                    <div class="row">
+                        <div class="col-xl-4 d-flex text-center">
+                            <img  src="img/4 2.png" alt="">
+                            <h2>The Mastery Mind College </h2>
+                        </div>
+                        <div class="col-xl-8 d-flex justify-content-center  ">
+
+                            <nav class="navbar navbar-expand-lg  ">
+
+                                <div class="container  ">
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                        <ul class="navbar-nav   ">
+                            <li class="nav-item pe-5">
+                                <a class="nav-link" href="courses.html"><h4>Courses</h4></a>
+                            </li>
+                            <li class="nav-item pe-5">
+                                <a class="nav-link" href="grads.html" > <h4>Grades</h4></a>
+                            </li>
+                            <li class="nav-item pe-5">
+                                <a class="nav-link" href="profile.html"> <h4>profile</h4></a>
+                            </li>  <li class="nav-item pe-5">
+                                <a class="nav-link" href="about.html"> <h4>AboutUs</h4></a>
+                            </li>  <li class="nav-item pe-5">
+                                <a class="nav-link" href="contact us.html"> <h4>ContactUs</h4></a>
+                        </li>
+                    
+                            </ul> 
+                    </div>
+                                </div>
+                    </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        
+        
+        </div>
+    </nav>
+<br><br>
+<div class="container">
+    <h2>Student Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="studentTableBody">
+            <!-- Student records will be inserted here -->
+        </tbody>
+    </table>
+
+    <h2>Add New Student</h2>
+    <form id="addStudentForm">
+        <input type="text" id="nameInput" placeholder="Name" required>
+        <input type="text" id="idInput" placeholder="ID" required>
+        <input type="text" id="sectionInput" placeholder="Section" required>
+        <input type="number" id="gradeInput" placeholder="Grade" min="0" max="100" required>
+        <input type="submit" value="Add Student">
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+    // Mock student data for demonstration
+    let students = [
+        { id: 1, name: "Ashraf Ahmed", section: "4", grade: 85 },
+        { id: 2, name: "Mohamed yasser", section: "3", grade: 52 },
+        { id: 3, name: "radi ", section: "2", grade: 92 },
+        { id: 4, name: "Menna nabil", section: "1", grade: 72 },
+        { id: 5, name: "واحلي سلام للدكتره مينا", section: "5", grade:12 },
+        
+
+
+    ];
+
+    // Function to display students in the table
+    function displayStudents() {
+        const tableBody = document.getElementById('studentTableBody');
+        tableBody.innerHTML = '';
+        students.forEach(student => {
+            const row = `<tr>
+                            <td>${student.id}</td>
+                            <td>${student.name}</td>
+                            <td>${student.section}</td>
+                            <td>${student.grade}</td>
+                            <td>
+                                <button onclick="editStudent(${student.id})">Edit</button>
+                                <button onclick="deleteStudent(${student.id})">Delete</button>
+                            </td>
+                        </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    // Function to add a new student
+    document.getElementById('addStudentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById('nameInput').value;
+        const id = document.getElementById('idInput').value;
+        const section = document.getElementById('sectionInput').value;
+        const grade = parseInt(document.getElementById('gradeInput').value);
+        const newStudent = { id, name, section, grade };
+        students.push(newStudent);
+        displayStudents();
+        document.getElementById('addStudentForm').reset();
+    });
+
+    // Function to delete a student
+    function deleteStudent(id) {
+        students = students.filter(student => student.id !== id);
+        displayStudents();
+    }
+
+    // Function to edit a student
+    function editStudent(id) {
+        const newName = prompt("Enter the new name:");
+        const newID = prompt("Enter the new ID:");
+        const newSection = prompt("Enter the new section:");
+        const newGrade = parseInt(prompt("Enter the new grade:"));
+        students.forEach(student => {
+            if (student.id === id) {
+                student.name = newName;
+                student.id = newID;
+                student.section = newSection;
+                student.grade = newGrade;
+            }
+        });
+        displayStudents();
+    }
+
+    // Display initial students
+    displayStudents();
+</script>
+
+</body>
+</html>

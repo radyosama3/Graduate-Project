@@ -1,0 +1,167 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+.con h3{
+    color: #04055D;
+    
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0em;
+    position: relative;
+    padding-bottom: 20px;
+    
+}
+.con h5{
+    color: #419197;
+font-size: 60px;
+font-weight: 400;
+line-height: 40px;
+letter-spacing: 0em;
+
+
+}
+.fram{
+box-shadow: 0px 4px 8px 0px #00000040;
+border: 3px solid #EBEDDA
+
+}
+.fram h2,i{
+    color: #04055D;
+    ;
+}
+
+.con-fram h5,h6{
+    color:#04055D ;
+    
+
+}
+.btn{
+    border-radius: 1em;
+    width: 15em;
+color: white !important;
+background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+transition: 0.80s;
+}
+.btn1{
+    border-radius: 1em;
+    width: 10em;
+color: white !important;
+background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+transition: 0.80s;
+}
+
+.btn:hover{
+    width:16em;
+    color:#419197 !important ;
+    background:white  ;
+    transform: translate(0.5s ) scale(1s);
+}
+.btn1:hover{
+    width:16em;
+    color:#419197 !important ;
+    background:white  ;
+    transform: translate(0.5s ) scale(1s);
+}
+h4{
+    transition: 0.50s;
+
+}
+.btn:hover h4 {
+    font-size: 27px;
+    transform: translate(0.5s ) scale(1s);
+
+  
+}
+
+
+.end{
+    background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+
+}
+.end{
+    background: #000;
+    width: 100%;
+    height: 100 px;
+    background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+
+}
+
+.container::before{
+    content: "";
+    position: fixed;
+    bottom: -15%;
+    left: 0%;
+    width: 300%;
+    height: 30%;
+    background: linear-gradient(90.27deg, #419197 17.72%, #38868a 31.05%, #36615f 53.49%, #7ecbbe 86%);
+transform: translateX(-50%) skew(0,10deg);
+border-radius: 560%;
+z-index: -1;
+animation: wave 17s ease-in-out infinite alternate 
+}
+@keyframes wave {
+    0%,100%{
+        transform: translateX(-50%) skew(0,2deg);
+    }
+    50%{
+        transform: translateX(-10%) skew(1deg,0);
+    }
+    
+    
+}
+
+.h5::after{
+    content: '|';
+    animation-name: typing;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    
+ }
+ @keyframes typing{
+    0%{ content:"|";}
+    5%{content:"M|";}
+    10%{content:"Mo|";}
+    15%{content:"Mod|";}
+    20%{content:"Mode|";}
+    25%{content:"Moder|";}
+    30%{content:"Modern |";}
+    35%{content:"Modern A|";}
+    40%{content:"Modern Ac|";}
+    45%{content:"Modern Aca|";}
+    50%{content:"Modern Acad|";}
+    53%{content:"Modern Acade|";}
+    55%{content:"Modern Academy|";}
+    60%{content:"Modern Academ|";}
+    65%{content:"Modern Acade|";}
+    70%{content:"Modern Acad|";}
+    75%{content:"Modern Aca|";}
+    77%{content:"Modern Ac|";}
+    80%{content:"Modern A|";}
+    82%{content:"Modern |";}
+    85%{content:"Moder|";}
+    88%{content:"Mode|";}
+    90%{content:"Mod|";}
+    92%{content:"Mo|";}
+    95%{content:"M|";}
+    97%{ content:"|";}
+    99%{ content:"";}
+    120%{ content:"|";}
+
+
+
+
+
+
+
+
+ }
+
+ .logo-login{
+    height: 50%;
+    padding-top: 50px;
+ }
+
+

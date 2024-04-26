@@ -1,0 +1,116 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.header{
+width:100%;
+height: 3.5rem;
+background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+z-index: auto;
+
+}
+
+.header img{
+    width: 80%;
+}
+.header i{
+    font-size: 1.5rem;
+    
+    }
+    .header h4{
+        color:azure;
+    }
+    .navbar h3{
+margin-left: 300px ;
+    }
+    
+.home-sec img{
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+
+}
+
+h2{
+    color: #419197;
+}
+h5{
+    color: #04055DAB;
+    font-family: Mulish;
+font-size: 30px;
+font-weight:500;
+
+
+
+}
+ul h4{ 
+color:#04055DE3;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #f2f2f2;
+}
+form {
+    margin-top: 20px;
+}
+input[type="text"], input[type="number"], input[type="submit"] {
+    padding: 5px;
+    margin-right: 10px;
+}
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.action-buttons button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-buttons button.edit {
+    background-color: #007bff;
+    color: white;
+}
+
+.action-buttons button.edit:hover {
+    background-color: #0056b3;
+}
+
+.action-buttons button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-buttons button.delete:hover {
+    background-color: #c82333;
+}
