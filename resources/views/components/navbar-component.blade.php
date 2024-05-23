@@ -6,7 +6,7 @@
         @if ($auth->thumbnail)
             <img src="{{ $auth->thumbnail }}" alt="user thumbnail">
         @else
-            <img src="img/Ellipse 2.png" alt>
+            <img src="../img/Ellipse 2.png" alt>
         @endif
     </div>
 </div>
@@ -16,7 +16,7 @@
             <div class="container ">
                 <div class="row">
                     <div class="col-xl-4 d-flex text-center">
-                        <img width="140" src="img/Modern.png " alt="">
+                        <img width="140" src="../img/Modern.png " alt="">
                         <h2 class="h2">Modern Academy </h2>
                     </div>
                     <div class="col-xl-8 d-flex justify-content-center  ">
@@ -24,21 +24,38 @@
                             <div class="container ps-5  ">
                                 <div class="collapse navbar-collapse  ps-5" id="navbarSupportedContent">
                                     <ul class="navbar-nav   ">
+                                        @if (Auth::check() && Auth::user()->type == 'student')
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('courses-page') }}">
                                                 <h4>Courses</h4>
                                             </a>
                                         </li>
+                                        @elseif (Auth::check() && Auth::user()->type == 'instructor')
+                                        <li class="nav-item ps-5">
+                                            <a class="nav-link" href="{{ route('instructor-courses-page') }}">
+                                                <h4>Courses</h4>
+                                            </a>
+                                        </li>
+                                        @endif
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('grads-page') }}">
                                                 <h4>Grades</h4>
                                             </a>
                                         </li>
+
+                                        @if (Auth::check() && Auth::user()->type == 'student')
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('profile-page') }}">
                                                 <h4>Profile</h4>
                                             </a>
                                         </li>
+                                        @elseif (Auth::check() && Auth::user()->type == 'instructor')
+                                        <li class="nav-item ps-5">
+                                            <a class="nav-link" href="{{ route('instructor-profile-page') }}">
+                                                <h4>Profile</h4>
+                                            </a>
+                                        </li>
+                                        @endif
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('about-page') }}">
                                                 <h4>AboutUs</h4>

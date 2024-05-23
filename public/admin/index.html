@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="user.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Student</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <nav>
+                    <a href="#addCourse">Add Course</a>
+                    <a href="#addUser">Add User</a>
+                    <a href="#assignCourse">Assign Course</a>
+                    <a href="#addLecture">Add Lecture</a>
+                </nav>
+                
+
+                <div class="user">
+                    <img src="assets/imgs/customer01.jpg" alt="">
+                </div>
+            </div>
+
+
+
+             <div class="container1">
+                <div class="main-content" id="addCourse">
+                    <h2>Add Course</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="courseName">Course Name</label>
+                            <input type="text" id="courseName" name="courseName" placeholder="Enter course name">
+                        </div>
+                        <div class="form-group">
+                            <label for="courseDescription">Course Description</label>
+                            <input type="text" id="courseDescription" name="courseDescription" placeholder="Enter course description">
+                        </div>
+                       
+
+                        <div class="form-group">
+                            <label for="icon">icon</label>
+                            <select id="icon" name="icon">
+                                <!-- Options would be populated dynamically -->
+                                <option value="1">active</option>
+                                <option value="2">not active</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Add Course</button>
+                        </div>
+                    </form>
+                </div>
+        
+                <div class="main-content" id="addUser">
+                    <h2>Add User</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input type="text" id="userName" name="userName" placeholder="Enter user name">
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">User Email</label>
+                            <input type="email" id="userEmail" name="userEmail" placeholder="Enter user email">
+                        </div>
+                        <div class="form-group">
+                            <label for="userId">User id</label>
+                            <input type="text" id="userId" name="userId" placeholder="Enter user Id">
+                        </div>
+                        <div class="form-group">
+                            <label for="Class">Class</label>
+                            <input type="text" id="Class" name="Class" placeholder="Enter user Class">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userlevel">level</label>
+                            <input type="text" id="level" name="level" placeholder="Enter user level">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="userNumber">User Number</label>
+                            <input type="text" id="userNumber" name="userNumber" placeholder="Enter user number">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="Password">User password</label>
+                            <input type="text" id="Password" name="userPassword" placeholder="Enter user password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userRole">User Role</label>
+                            <select id="userRole" name="userRole">
+                                <option value="student">Student</option>
+                                <option value="instructor">Instructor</option>
+                                <option value="instructor">Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Add User</button>
+                        </div>
+                    </form>
+                </div>
+        
+                <div class="main-content">
+                    <h2>Assign Course</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="assignUser">Select User</label>
+                            <select id="assignUser" name="assignUser">
+                                <!-- Options would be populated dynamically -->
+                                <option value="1">John Doe (Student)</option>
+                                <option value="2">Jane Smith (Instructor)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignCourse">Select Course</label>
+                            <select id="assignCourse" name="assignCourse">
+                                <!-- Options would be populated dynamically -->
+                                <option value="101">Course 1</option>
+                                <option value="102">Course 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Assign Course</button>
+                        </div>
+                    </form>
+                </div>
+        
+                <div class="main-content" id="addLecture">
+                    <h2>Add Lecture</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="lectureTitle">Lecture Title</label>
+                            <input type="text" id="lectureTitle" name="lectureTitle" placeholder="Enter lecture title">
+                        </div>
+                        <div class="form-group">
+                            <label for="lectureContent">Lecture Content</label>
+                            <input type="text" id="lectureContent" name="lectureContent" placeholder="Enter lecture content">
+                        </div>
+                        <div class="form-group">
+                            <label for="lectureCourse">Assign to Course</label>
+                            <select id="lectureCourse" name="lectureCourse">
+                                <!-- Options would be populated dynamically -->
+                                <option value="101">Course 1</option>
+                                <option value="102">Course 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Add Lecture</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========== Scripts =========  -->
+    <script src="scripts.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- ======= Charts JS ====== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="assets/js/chartsJS.js"></script>
+    
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

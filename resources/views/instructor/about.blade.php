@@ -17,7 +17,7 @@
 @endsection
 
 @section('main.style')
-    <link rel="stylesheet" href="{{ asset('css/about us.css') }}">
+    <link rel="stylesheet" href="{{ asset('../css/about us.css') }}">
 @endsection
 
 @section('main.script')

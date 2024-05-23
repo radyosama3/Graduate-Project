@@ -1,7 +1,7 @@
 @extends('structure')
 
 @section('pageName')
-| Courses
+| insturtor Courses
 @endsection
 
 @section('meta')
@@ -17,12 +17,12 @@
 @endsection
 
 @section('main.style')
-    <link rel="stylesheet" href="{{ asset('css/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('../css/courses.css') }}">
 @endsection
 
 @section('main.script')
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/courses.js') }}"></script>
+    <script src="{{ asset('../js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('../js/courses.js') }}"></script>
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
         <div class="row1 bg-danger">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="home-sec">
-                    <img src="img/Rectangle 4.png" alt="">
+                    <img src="../img/Rectangle 4.png" alt="">
                 </div>
             </div>
         </div>
@@ -55,17 +55,15 @@
             <div class="container ">
                 <div class="row d-flex " dir="{{ $dir }}">
                     <div class=" hover col-lg-6 col-md-12 col-sm-12 position-relative">
-                        <img src="img/Rectangle 11.png" alt="">
+                        <img src="../img/Rectangle 11.png" alt="">
                         <div class="hover-img text-center d-flex align-content-center justify-content-center ">
-                            <a href="{{ route('course-show-page',$item->course->id) }}">
+                            <a href="{{ route('instructor-ShowCourse',$item->course->id) }}">
                                 <button class=" btn  text-center h-25 "> course details</button>
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-4 text-center m-auto offset-2">
                         <h2 class="py-3 ">@if($item->course){{$item->course->name }} @endif </h2>
-
-                        {{-- <h2 class="py-3 ">{{$item->course->name}} </h2> --}}
 
                         <h5 class="" dir="ltr">
                             @if($item->course){{ Str::limit($item->course->description, $limit = 100, $end = '...') }}@endif

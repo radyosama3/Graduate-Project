@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('user_id')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('type', ['student','instructor','admin'])->default('student');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('image')->nullable();
             $table->string('class_room')->nullable();
             $table->string('level')->nullable();
             $table->string('number')->nullable();

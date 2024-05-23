@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class IsStudent
@@ -13,8 +14,14 @@ class IsStudent
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if (Auth::check() && Auth::user()->type == 'student') {
+            return $next($request);
+        }
+
+        // Redirect or handle the unauthorized access as needed
+        return redirect(route('login'))->with('error', 'You do not have student access.');
     }
+
 }

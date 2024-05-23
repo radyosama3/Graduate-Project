@@ -13,10 +13,10 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $grads = UserHasCourse::where('user_id',Auth::id())
+        $grads = UserHasCourse::where('user_id',
+        Auth::id())
         ->with('course')
         ->get();
-        // return  $grads;
         return view('pages.grads',compact('grads'));
     }
 
@@ -65,6 +65,5 @@ class GradeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

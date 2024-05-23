@@ -19,7 +19,7 @@ class CourseFactory extends Factory
         return [
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph(30),
-            'thumbnail' => null,
+            'icon' => null,
             'is_active' => $this->faker->boolean(80),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),

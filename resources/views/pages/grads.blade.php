@@ -44,8 +44,10 @@
                 <tbody>
                     @foreach ($grads as $item)
                     <tr>
-                        <td>{{ $item->course->name }}</td>
-                        <td>{{ $item->grade }}</td>
+
+                      <td> @if($item->course){{(  $item->course->name)}}</td>@endif
+                        <td> {{ $item->grade }}</td>
+
                     </tr>
                     @endforeach
                 </tbody>

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    
+
     public function viewLogin(){
         return view('pages.login');
     }
@@ -25,7 +25,8 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('profile-page')->with('success', 'Login successful!');
+             return redirect()->route('redirecto')->with('success', 'Login successful!');
+            // return redirect()->route('profile-page')->with('success', 'Login successful!');
         }
 
         return back()->withErrors(['identifier' => 'Invalid Identifier or password']);
@@ -40,7 +41,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    
+
     public function register(Request $request){
         $request->validate([
             'name' => 'required|string|max:255|min:3',

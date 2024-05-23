@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Abdulbaset R. Sayed',
-            'email' => 'abdulbaset_rs@digitalatum.com',
+            'name' => 'student',
+            'email' => 'student@gmail.com',
             'type' => 'student',
             'password' => bcrypt('123456789'),
         ]);
-        User::factory(10)->create();
-        Course::factory(10)->create();
-        Lecture::factory(30)->create();
-        UserHasCourse::factory(30)->create();
+        // User::factory(10)->create();
+        // Course::factory(10)->create();
+        // Lecture::factory(30)->create();
+        // UserHasCourse::factory(30)->create();
     }
 }

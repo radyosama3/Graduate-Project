@@ -17,16 +17,17 @@
 @endsection
 
 @section('main.style')
-    <link rel="stylesheet" href="{{ asset('css/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('../../css/courses.css') }}">
 @endsection
 
 @section('main.script')
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/courses.js') }}"></script>
+    <script src="{{ asset('../../js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('../../js/courses.js') }}"></script>
 @endsection
 
 @section('content')
-    <x-navbar-component />
+<x-navbar-component />
+    {{-- <x-navbar-component /> --}}
     <div class="container-fluid">
         <div class="row1 bg-danger">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -57,7 +58,7 @@
                     <div class=" hover col-lg-6 col-md-12 col-sm-12 position-relative">
                         <img src="img/Rectangle 11.png" alt="">
                         <div class="hover-img text-center d-flex align-content-center justify-content-center ">
-                            <a href="{{ route('course-show-page',$item->course->id) }}">
+                            <a href="{{route('course-show-page',$item->course->id) }}">
                                 <button class=" btn  text-center h-25 "> course details</button>
                             </a>
                         </div>
