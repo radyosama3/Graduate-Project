@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
-use App\Models\UserHasCourse;
 use Illuminate\Http\Request;
+use App\Models\UserHasCourse;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public  function redirecto(){
         if (Auth::user()->type=="admin"){
-            return view('admin.home');
+            $types = User::pluck('type')->unique();
+
+            return view('admin.home',compact('types'));
         }
         else if (Auth::user()->type=="student"){
             $courses = UserHasCourse::where('user_id',Auth::id())

@@ -2,67 +2,81 @@
 @section('body')
 {{-- add user --}}
 <div class="main-content" id="addUser">
+    @include('errors')
+    @include('success')
+    <br>
     <h2>Add User</h2>
     <br>
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="userId">User id</label>
-            <input type="text" id="userId" name="userId" placeholder="Enter Id">
+            <label for="userId">User ID</label>
+            <input type="text" id="id" name="id" placeholder="Enter ID" >
         </div>
 
         <div class="form-group">
             <label for="userName">User Name</label>
-            <input type="text" id="userName" name="userName" placeholder="Enter user name">
+            <input type="text" id="name" name="name" placeholder="Enter user name" >
         </div>
 
         <div class="form-group">
             <label for="userEmail">User Email</label>
-            <input type="email" id="userEmail" name="userEmail" placeholder="Enter user email">
+            <input type="email" id="email" name="email" placeholder="Enter user email" >
+
         </div>
 
         <div class="form-group">
             <label for="userRole">User Role</label>
-            <select id="userRole" name="userRole">
-                <option value="student">Student</option>
-                <option value="instructor">Instructor</option>
-                <option value="admin">Admin</option>
+            <select id="type" name="type">
+                {{-- @foreach ($types as $type) --}}
+                    {{-- <option value="{{ $type }}" {{ old('type') == $type ? 'selected' : '' }}>{{ $type }}</option> --}}
+                    <option value="admin">admin</option>
+                    <option value="student">student</option>
+                    <option value="instructor">instructor</option>
+                {{-- @endforeach --}}
             </select>
+
         </div>
 
         <div class="form-group">
-            <label for="Class">Class</label>
-            <input type="text" id="Class" name="Class" placeholder="Enter user Class">
+            <label for="class">Class</label>
+            <input type="text" id="class_room" name="class_room" placeholder="Enter user class" >
         </div>
 
         <div class="form-group">
             <label for="level">Level</label>
             <input type="text" id="level" name="level" placeholder="Enter user level">
+
         </div>
 
         <div class="form-group">
             <label for="userNumber">User Number</label>
-            <input type="text" id="userNumber" name="userNumber" placeholder="Enter user number">
+            <input type="text" id="number" name="number" placeholder="Enter user number" >
+
         </div>
 
         <div class="form-group">
-            <label for="Password">User Password</label>
-            <input type="password" id="Password" name="userPassword" placeholder="Enter user password">
+            <label for="password">User Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter user password">
+
         </div>
 
         <div class="form-group">
-            <label for="Password_confirmed">Confirm Password</label>
-            <input type="password" id="Password_confirmed" name="userPassword_confirmation" placeholder="Enter confirm password">
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Enter confirm password">
+
         </div>
 
         <div class="form-group">
             <label for="image">User Image</label>
             <input type="file" id="image" name="image" accept="image/*">
+
         </div>
 
         <div class="form-group">
             <button type="submit">Add User</button>
         </div>
     </form>
+
 </div>
 @endsection

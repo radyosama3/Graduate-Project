@@ -47,10 +47,31 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
 });
 
 
-Route::get('adduser', function (){ return view('admin.adduser');})->name('adduser');
-Route::get('addcourse', function (){ return view('admin.addcourse');})->name('addcourse');
 Route::get('assincourse', function () {return view('admin.assigncourse');})->name('assincourse');
 Route::get('addlec', function () {return view('admin.addLec');})->name('addlec');
+
+Route::controller(AdminController::class)->group(function(){
+    Route::get('adduser','adduser')->name('adduser');
+    Route::post('addusers','store')->name('store') ;
+
+    // Route::get('alluser','alluser')->name('alluser');
+    Route::get('showall','showall')->name('allusers');
+    Route::get('users/edit/{id}','editusers')->name('edituser');
+    Route::put('user/update/{id}','updateuser')->name('updateuser');
+
+    Route::delete('deleteuser/{id}','deleteuser')->name('deleteuser');
+    Route::get('addcourse', 'addcourse')->name('addcourse');
+
+
+    Route::get('allcourses','allcourses')->name('allcourses');
+    Route::post('addcourses','storecourse')->name('storecourse') ;
+    Route::get('course/edit/{id}','editcourse')->name('editcourse');
+    Route::put('course/update/{id}','updatecourse')->name('updatecourse');
+
+    Route::delete('deletecourse/{id}','deletecourse')->name('deletecourse');
+
+
+});
 
 
 //group  of route instructor

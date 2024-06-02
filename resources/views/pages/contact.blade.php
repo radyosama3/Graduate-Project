@@ -23,7 +23,6 @@
 @section('main.script')
     {{-- // --}}
 @endsection
-
 @section('content')
     <x-navbar-component />
     <section id="contact-us">
