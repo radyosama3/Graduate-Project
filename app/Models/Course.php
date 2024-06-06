@@ -17,10 +17,14 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'course_id',
         'name',
         'description',
         'thumbnail',
         'is_active',
+    ];
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     public function lectures(){

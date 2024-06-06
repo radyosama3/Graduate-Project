@@ -21,6 +21,7 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'id' => 'nullable|numeric|unique:users,id',
+            'user_id' => 'required|unique:users,user_id',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'type' => ['required', Rule::in(['student', 'instructor', 'admin'])],
@@ -60,6 +61,7 @@ class AdminController extends Controller
     {
         $user= User::findOrFail($id);
         $data = $request->validate([
+          'user_id' => 'required|unique:users,user_id',
             'name' => 'required|string|max:255',
             'email' => ['required','email','max:255',
                 Rule::unique('users')->ignore($user->id),
@@ -104,10 +106,11 @@ public function storecourse (Request $request)
     {
         $data=$request->validate([
             'id' => 'nullable|integer|unique:courses',
+            'course_id' => 'required|unique:courses,course_id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'icon' => 'nullable|image|mimes:pnj,jpg',
-            'active' => 'required',
+            'is_active' => 'required|boolean',
         ]);
         if (isset($data['icon'])) {
             $data['icon'] = Storage::putFile('coursesIcon', $data['icon']);
@@ -138,7 +141,7 @@ public function updatecourse(Request $request, $id)
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'icon' => 'nullable|image|mimes',
-            'active' => 'required',
+            'is_active' => 'required|boolean',
         ]);
 
 

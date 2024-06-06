@@ -11,7 +11,7 @@
                 {{-- id  --}}
                 <div class="form-group">
                     <label for="userId">User ID</label>
-                    <input type="text" id="id" value="{{$user->id}}" name="id" placeholder="Enter ID" >
+                    <input type="text" id="user_id" value="{{$user->user_id}}" name="user_id" placeholder="Enter ID" >
                 </div>
                 {{-- Name --}}
 

@@ -17,13 +17,19 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($courses as $course)
+        @foreach( $courses as $course)
             <tr>
                 <td>{{ $course->id }}</td>
                 <td>{{ $course->name }}</td>
                 <td>{{ $course->description }}</td>
                 <td>{{ $course->icon }}</td>
-                <td>{{$course->is_active}}</td>
+                <td>
+                    @if($course->is_active == 1)
+                        Active
+                    @else
+                        Not Active
+                    @endif
+                </td>
                 <td>
                     <a type="button" href="{{route('editcourse',$course->id)}}" class="edit-btn">Edit</a>
 

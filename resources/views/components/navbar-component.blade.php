@@ -1,6 +1,8 @@
 <div class="header d-flex justify-content-end ">
-    <i><i class="fa-regular fa-bell p-4 "></i></i>
-    <h4 class="p-3"> <a href="{{ route('request.logout') }}">logout</a></h4>
+    {{-- <i><i class="fa-regular fa-bell p-4 "></i></i> --}}
+
+
+    <h4 class="p-3"> <a href="{{ route('request.logout') }}" class="btn btn-logout">Logout</a></h4>
     <h4 class="p-3">{{ $auth->name }}</h4>
     <div class="icon">
         @if ($auth->thumbnail)

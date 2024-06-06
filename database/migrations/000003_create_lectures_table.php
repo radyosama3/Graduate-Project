@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lectures', function (Blueprint $table) {
-            $table->id();
-            $table->string('course_id');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->string('thumbnail')->nullable();
-            $table->json('media')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-        });
+            Schema::create('lectures', function (Blueprint $table) {
+                $table->id();
+                $table->string('course_id');
+                $table->string('title');
+                $table->text('description')->nullable();
+                $table->string('thumbnail')->nullable();
+                $table->json('media')->nullable();
+                $table->boolean('is_active')->default(true);
+                $table->timestamps();
+            });
     }
 
     /**

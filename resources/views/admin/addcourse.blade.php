@@ -14,7 +14,7 @@
                 @csrf
                     <div class="form-group">
                         <label for="course_id">Course Id</label>
-                        <input type="text" id="id" name="id" placeholder="Enter course Id">
+                        <input type="text" id="course_id" name="course_id" placeholder="Enter course Id">
                     </div>
 
                     <div class="form-group">
@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label for="active">Is Active</label>
-                        <select id="active" name="active">
+                        <select id="is_active" name="is_active">
                             <!-- Options would be populated dynamically -->
                             <option value="1">active</option>
                             <option value="2">not active</option>

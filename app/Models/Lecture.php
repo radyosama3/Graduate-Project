@@ -24,8 +24,11 @@ class Lecture extends Model
         'media',
         'is_active',
     ];
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
-    
+
 
 }
 

@@ -13,7 +13,7 @@
                 @method('PUT')
                     <div class="form-group">
                         <label for="course_id">Course Id</label>
-                        <input type="text" id="id" value="{{$course->id}}" name="id" placeholder="Enter course Id">
+                        <input type="text" id="id" value="{{$course->course_id}}" name="id" placeholder="Enter course Id">
                     </div>
 
                     <div class="form-group">
@@ -33,9 +33,9 @@
 
                     <div class="form-group">
                         <label for="active">Is Active</label>
-                        <select id="active" name="active">
-                            <option value="not active"{{ (old('is_active', $course->is_active) == '0') ? 'selected' : '' }}>not active</option>
-                            <option value=" active"{{ (old('is_active', $course->is_active) == '1') ? 'selected' : '' }}> active</option>
+                        <select id="is_active" name="is_active" class="form-control">
+                            <option value="0"{{ (old('is_active', $course->is_active) == '0') ? ' selected' : '' }}>Not Active</option>
+                            <option value="1"{{ (old('is_active', $course->is_active) == '1') ? ' selected' : '' }}>Active</option>
                         </select>
                     </div>
 

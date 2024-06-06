@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->user_id }}</td>
                     <td>{{ $user->class_room }}</td>
                     <td>{{ $user->level }}</td>
                     <td>{{ $user->number }}</td>
