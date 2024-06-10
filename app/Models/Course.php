@@ -30,5 +30,11 @@ class Course extends Model
     public function lectures(){
         return $this->hasMany(Lecture::class,'course_id');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_has_courses')
+                    ->withPivot('grade')
+                    ->withTimestamps();
+    }
 
 }

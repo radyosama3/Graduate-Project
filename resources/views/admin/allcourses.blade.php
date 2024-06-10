@@ -19,7 +19,7 @@
     <tbody>
         @foreach( $courses as $course)
             <tr>
-                <td>{{ $course->id }}</td>
+                <td>{{ $course->course_id }}</td>
                 <td>{{ $course->name }}</td>
                 <td>{{ $course->description }}</td>
                 <td>{{ $course->icon }}</td>

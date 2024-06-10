@@ -47,7 +47,10 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
 });
 
 
-Route::get('assincourse', function () {return view('admin.assigncourse');})->name('assincourse');
+// Route::get('assincourse', function () {
+
+// return view('admin.assigncourse');})->name('assincourse');
+
 Route::get('addlec', function () {return view('admin.addLec');})->name('addlec');
 
 Route::controller(AdminController::class)->group(function(){
@@ -69,6 +72,9 @@ Route::controller(AdminController::class)->group(function(){
     Route::put('course/update/{id}','updatecourse')->name('updatecourse');
 
     Route::delete('deletecourse/{id}','deletecourse')->name('deletecourse');
+
+    Route::get('assincourse','showAssignCourseForm')->name('assincourse');
+    Route::post('assignCourse','assignCourse')->name('storeassignCourse');
 
 
 });

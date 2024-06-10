@@ -61,7 +61,11 @@ class AdminController extends Controller
     {
         $user= User::findOrFail($id);
         $data = $request->validate([
-          'user_id' => 'required|unique:users,user_id',
+            'user_id' => [
+                'required',
+                Rule::unique('users', 'user_id')->ignore($user->id)
+            ],
+        //   'user_id' => 'required|unique:users,user_id',
             'name' => 'required|string|max:255',
             'email' => ['required','email','max:255',
                 Rule::unique('users')->ignore($user->id),
@@ -137,7 +141,10 @@ public function updatecourse(Request $request, $id)
     {
         $course= Course::findOrFail($id);
         $data=$request->validate([
-            'id' => 'nullable|integer|unique:courses',
+            'id' => 'nullable|integer|unique:courses,id,' . $course->id,
+         'course_id' => [
+                'required',
+                Rule::unique('courses', 'course_id')->ignore($course->id)],
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'icon' => 'nullable|image|mimes',
@@ -153,6 +160,37 @@ public function updatecourse(Request $request, $id)
         $course->update($data);
         return redirect(route('allcourses'))->with('success', 'course updated successfully.');
 
+    }
+    public function showAssignCourseForm()
+    {
+        $users = User::all();
+        $courses = Course::all();
+        return view('admin.assigncourse', compact('users', 'courses'));
+    }
+
+    public function assignCourse(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'course_id' => 'required|exists:courses,id',
+            'grade' => 'nullable|string',
+        ]);
+
+        $user = User::find($request->user_id);
+        if ($user) {
+            // Check if the user already has the course assigned
+            if ($user->courses->contains($request->course_id)) {
+
+                return redirect()->back()->with('error', 'the User already enrolled in this course.');
+
+            }
+            // Attach the course with the grade to the user
+            $user->courses()->attach($request->course_id, ['grade' => $request->grade]);
+
+            return redirect()->back()->with('success', ' the Course assigned successfully!');
+        } else {
+            return redirect()->back()->with('error', ' the User not found.');
+        }
     }
 
 }

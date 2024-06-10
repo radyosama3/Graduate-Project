@@ -29,6 +29,13 @@ class User extends Authenticatable
         'number',
     ];
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'user_has_courses')
+                    ->withPivot('grade')
+                    ->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

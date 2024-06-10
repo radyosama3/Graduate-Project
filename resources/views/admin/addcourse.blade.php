@@ -37,7 +37,7 @@
                         <select id="is_active" name="is_active">
                             <!-- Options would be populated dynamically -->
                             <option value="1">active</option>
-                            <option value="2">not active</option>
+                            <option value="0">not active</option>
                         </select>
                     </div>
 

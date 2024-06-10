@@ -33,6 +33,7 @@
                 <div class=" logo-login text-center   ">
                     <img width="500em" src="img/Modern.png" alt="logo">
                 </div>
+                <br>
                 <div class="con text-center ">
                     <h3 class="h3">Welcome To </h3>
                     <h5 class="h5"></h5>
@@ -60,9 +61,10 @@
                             <button type="submit" class="btn d-flex  m-auto">
                                 <h4 class="m-auto d-inline" id> Log in</h4>
                             </button> <br />
-                            <a href="{{ route('register-page') }}" type="button" class=" btn btn1 d-flex  m-auto">
+                            {{-- <a href="{{ route('register-page') }}" type="button" class=" btn btn1 d-flex  m-auto">
                                 <h4 class="m-auto d-inline" id> Register</h4>
-                            </a> <br />
+                            </a> --}}
+                            <br />
 
                             @error('identifier')
                                 {{ $message }}
