@@ -1,0 +1,168 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+.header{
+
+width:100%;
+height: 3.5rem;
+background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+
+
+}
+.header img{
+    width: 80%;
+}
+.header i{
+    font-size: 1.5rem;
+    
+    }
+    .navbar h3{
+margin-left: 300px ;
+    }
+    
+.home-sec img{
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+
+}
+
+
+
+h1{
+    color: #04055D;
+    font-family: Oswald;
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 120px;
+    letter-spacing: 0em;
+    
+  
+    
+}
+.h2{
+    color: #419197;
+    padding-top: 35px
+    
+}
+h2{
+    color: #20666b9c;
+    
+    
+}
+
+
+
+
+
+ul h4{ 
+    color: #225f64bd;
+}
+
+
+
+
+
+
+
+
+
+
+/*section four*/
+
+#contact-us .head h2{
+    text-transform: uppercase;
+    font-size: 35px;
+    color:#419197;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#contact-us .head p{
+    color:#777;
+    font-weight: 300;
+    font-size: 16px;
+}
+#contact-us .con-info h3{
+    color:#419197;
+    font-size: 18px;
+    font-weight: bold;
+}
+#contact-us .con-info p{
+    font-size: 16px;
+    line-height: 26px;
+    color:#777;
+}
+
+#contact-us .icons{
+    margin-top:50px;
+}
+#contact-us .icons p{
+    margin-bottom: 35px;
+}
+#contact-us i{
+    margin-right: 20px;
+    color:#777;
+}
+#contact-us .red{
+    color:#419197 !important;
+}
+
+
+#contact-us .con-info .social-list{
+    margin-top:50px;
+    color:#777;
+    
+}
+
+#contact-us .con-info .social-list i{
+    margin-right: 10px;
+    border:1px solid #999;
+    width:40px;
+    height: 40px;
+    line-height: 42px;
+    cursor: pointer;
+    text-align: center;
+}
+#contact-us .con-info .social-list i:hover{
+    color:#fff;
+    background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+    border:1px solid #419197;
+}
+#contact-us form input,
+#contact-us form textarea{
+    margin-bottom: 20px;
+    border-radius: 0;
+}
+#contact-us form textarea{
+    height: 200px;
+    resize:vertical;
+}
+
+#contact-us form button{
+    background: linear-gradient(90.27deg, #419197 17.72%, #356C6F 31.05%, #71BAB6 53.49%, #78D6C6 86%);
+    color:#fff;
+    padding:10px 210px;
+    border-radius: 20px;
+    text-transform: uppercase
+}
+
+#chars
+{
+    font-size: 20px;
+    color: #419197;
+}
+.btn{
+    display:block;margin-top:20px
+}
+.s::before {
+    content: '';
+    position: absolute;
+    top:9rem ;
+    left: 2rem;
+    width: 95%;
+    height: 1px;
+    border: 1px solid #ccc;
+  
+  }

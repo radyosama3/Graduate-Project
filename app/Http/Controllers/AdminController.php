@@ -18,30 +18,34 @@ class AdminController extends Controller
         return view('admin.adduser',compact('types'));
     }
     public function store(Request $request)
-    {
-        $data = $request->validate([
-            'id' => 'nullable|numeric|unique:users,id',
-            'user_id' => 'required|unique:users,user_id',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email|max:255',
-            'type' => ['required', Rule::in(['student', 'instructor', 'admin'])],
-            'class_room' => 'nullable|string|max:2',
-            'level' => 'nullable|string|max:1',
-            'number' => 'nullable|string|max:15',
-            'password' => 'required|string|min:8|max:25|confirmed',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        // $data['image'] = Storage::putFile('userImage', $data['image']);
+{
+    $data = $request->validate([
+        'id' => 'nullable|numeric|unique:users,id',
+        'user_id' => 'required|unique:users,user_id',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email|max:255',
+        'type' => ['required', Rule::in(['student', 'instructor', 'admin'])],
+        'class_room' => 'nullable|string|max:2',
+        'level' => 'nullable|string|max:1',
+        'number' => 'nullable|string|max:15',
+        'password' => 'required|string|min:8|max:25|confirmed',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        if (isset($data['image'])) {
-                $data['image'] = Storage::putFile('userImage', $data['image']);
-            }
-
-        $data['password']= bcrypt($data['password']);
-        $user = User::create($data );
-        return redirect()->back()->with('success', 'User added successfully.');
-
+    if ($request->hasFile('image')) {
+        $path = Storage::putFile('userImage', $data['image']);
+        if ($path) {
+            $data['image'] = $path;
+        } else {
+            dd('Failed to store image');
+        }
     }
+    $data['password'] = bcrypt($data['password']);
+    // return response()->json($data);
+    $user = User::create($data);
+
+    return redirect()->back()->with('success', 'User added successfully.');
+}
 
     public function editusers( $id){
             $users = User::all();
@@ -50,7 +54,6 @@ class AdminController extends Controller
     }
     public function addcourse(){
         $courses = Course::all();
-
         return view('admin.addcourse',compact('courses'));
     }
     public function showall(){
@@ -79,9 +82,10 @@ class AdminController extends Controller
         ]);
 
         if ($request->has("image")) {
+            if($user->image!=null){
                 Storage::delete($user->image);
+            }
                 $data['image'] = Storage::putFile('userImage', $data['image']);
-
             }
 
         $data['password']= bcrypt($data['password']);

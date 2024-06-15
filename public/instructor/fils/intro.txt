@@ -1,0 +1,1 @@
+The education management system is an integrated and advanced educational system that relies heavily on artificial intelligence and contains new features such as Extracting questions from the PDF, presenting them to the student in the form of an essay exam, and evaluating the student’s answers by AI.

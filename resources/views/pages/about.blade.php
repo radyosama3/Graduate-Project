@@ -26,7 +26,6 @@
 
 @section('content')
     <x-navbar-component />
-    <br>
     <div class="container">
         <h1>About Us </h1>
         <p>Welcome to Your Learning Management System (LMS), where we are dedicated to providing a robust online learning experience for students, educators, and professionals.</p>

@@ -51,13 +51,19 @@
             echo '
             <div class="custom-div">
                 <h4>Lecture '.$i.' : '.$value['title'].'</h4>
+                <h4> decription : '.$value['description'].'</h4>
+
                 <h6>Module '.$i.'\\'.$lectures_count .' complete</h6>
-                <i class="icon fa-solid fa-upload d-flex justify-content-end" >u p load</i>
+                <a class="icon fa-solid fa-upload d-flex justify-content-end" >u p load</a>
+
             </div><br>
             ';
             $i++;
         }
-    @endphp --}}
+    @endphp
+    <button   type="submit" id="add_quize" onclick="redirectToWebsite1()" class="btn d-flex  m-auto" ><h4 class="m-auto d-inline" id>Add Quize</h4></button>
+    <button   type="submit" id="add_lectrue " onclick="redirectToWebsite1()" class="btn d-flex  m-auto" ><h4 class="m-auto d-inline" id>Add new lecture </h4></button> <br/>
+
     {{-- @foreach ($course->lectures as $item)
         <div class="custom-div">
             <h4>Lecture 1 : {{ $item->title }}</h4>

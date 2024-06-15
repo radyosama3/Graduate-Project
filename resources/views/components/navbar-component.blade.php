@@ -1,12 +1,10 @@
 <div class="header d-flex justify-content-end ">
-    {{-- <i><i class="fa-regular fa-bell p-4 "></i></i> --}}
-
-
+    <i><i class="fa-regular fa-bell p-4 "></i></i>
     <h4 class="p-3"> <a href="{{ route('request.logout') }}" class="btn btn-logout">Logout</a></h4>
     <h4 class="p-3">{{ $auth->name }}</h4>
     <div class="icon">
-        @if ($auth->thumbnail)
-            <img src="{{ $auth->thumbnail }}" alt="user thumbnail">
+        @if ($auth->image)
+            <img src="{{$auth->image}}" alt="user image">
         @else
             <img src="../img/Ellipse 2.png" alt>
         @endif
@@ -25,7 +23,7 @@
                         <nav class="navbar navbar-expand-lg  ">
                             <div class="container ps-5  ">
                                 <div class="collapse navbar-collapse  ps-5" id="navbarSupportedContent">
-                                    <ul class="navbar-nav   ">
+                                    <ul class="navbar-nav">
                                         @if (Auth::check() && Auth::user()->type == 'student')
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('courses-page') }}">
@@ -39,6 +37,7 @@
                                             </a>
                                         </li>
                                         @endif
+                                        
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('grads-page') }}">
                                                 <h4>Grades</h4>

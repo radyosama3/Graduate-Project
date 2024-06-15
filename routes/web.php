@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\instructorController;
+use App\Models\Course;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -51,9 +52,12 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
 
 // return view('admin.assigncourse');})->name('assincourse');
 
-Route::get('addlec', function () {return view('admin.addLec');})->name('addlec');
+Route::get('addlec', function () {
+   $courses= Course::all();
+    return view('admin.addLec',compact('courses'));})->name('addlec');
 
 Route::controller(AdminController::class)->group(function(){
+
     Route::get('adduser','adduser')->name('adduser');
     Route::post('addusers','store')->name('store') ;
 

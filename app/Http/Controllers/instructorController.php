@@ -32,7 +32,6 @@ class instructorController extends Controller
         if (!$course) {
             abort(404);
         }
-        // return view('pages.course-show',compact('course'));
         return view ('instructor.ShowCourse',compact('course'));
     }
     public function upload(Request $request)
