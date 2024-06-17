@@ -21,7 +21,7 @@ class User extends Authenticatable
         'user_id',
         'name',
         'email',
-        'thumbnail',
+        'image',
         'password',
         'type',
         'class_room',
@@ -34,6 +34,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class, 'user_has_courses')
                     ->withPivot('grade')
                     ->withTimestamps();
+    }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 
     /**
@@ -55,4 +59,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
 }

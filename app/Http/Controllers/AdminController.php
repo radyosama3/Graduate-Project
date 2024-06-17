@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Lecture;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class AdminController extends Controller
         $types = User::pluck('type')->unique();
         return view('admin.adduser',compact('types'));
     }
+    //store user
     public function store(Request $request)
 {
     $data = $request->validate([
@@ -45,20 +47,12 @@ class AdminController extends Controller
     $user = User::create($data);
 
     return redirect()->back()->with('success', 'User added successfully.');
-}
-
+    }
+    //redirect to edit form
     public function editusers( $id){
             $users = User::all();
             $user= User::findOrFail( $id);
             return view('admin.edituser',compact('user','users'));
-    }
-    public function addcourse(){
-        $courses = Course::all();
-        return view('admin.addcourse',compact('courses'));
-    }
-    public function showall(){
-        $users = User::all();
-        return view('admin.alluser',compact('users'));
     }
     public function updateuser(Request $request, $id)
     {
@@ -87,83 +81,98 @@ class AdminController extends Controller
             }
                 $data['image'] = Storage::putFile('userImage', $data['image']);
             }
-
-        $data['password']= bcrypt($data['password']);
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']); // Remove the password from the $data array if it's not set
+        }
         $user->update($data);
         return redirect(route('allusers'))->with('success', 'User updated successfully.');
-
     }
+    public function deleteuser($id)
+    {
+        $user = User::findOrFail($id);
+        // Storage::delete($user->image);
+        $user->delete();
 
+        $users = User::all();
 
-public function deleteuser($id)
-{
-    $user = User::findOrFail($id);
-    // Storage::delete($user->image);
-    $user->delete();
-
-    $users = User::all();
-
-    return redirect()->route('allusers')->with('success', 'user deleted successfully!');
-}
-
-public function allcourses(){
-    $courses= Course::all();
-    return view('admin.allcourses',compact('courses'));
-}
-public function storecourse (Request $request)
+        return redirect()->route('allusers')->with('success', 'user deleted successfully!');
+    }
+    //show all user
+    public function showall(){
+        $users = User::all();
+        return view('admin.alluser',compact('users'));
+    }
+    //redirect to add course page
+    public function addcourse(){
+        $courses = Course::all();
+        return view('admin.addcourse',compact('courses'));
+    }
+    public function storecourse (Request $request)
     {
         $data=$request->validate([
             'id' => 'nullable|integer|unique:courses',
             'course_id' => 'required|unique:courses,course_id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'icon' => 'nullable|image|mimes:pnj,jpg',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'is_active' => 'required|boolean',
         ]);
         if (isset($data['icon'])) {
-            $data['icon'] = Storage::putFile('coursesIcon', $data['icon']);
+                $data['image'] = Storage::putFile('courseicon', $data['icon']);
         }
 
         Course::create($data);
         return redirect()->route('addcourse')->with('success', 'Course added successfully.');
 }
-public function editcourse($id){
-   $course= Course::findOrFail($id);
-   return view('admin.editcourse',compact('course'));
-}
-public function deletecourse($id)
-{
-    $course = Course::find($id);
-    if ($course) {
-        $course->delete();
-        return redirect()->route('allcourses')->with('success', 'Course deleted successfully!');
-    } else {
-        return redirect()->route('allcourses')->with('error', 'Course not found.');
+    public function allcourses(){
+        $courses= Course::all();
+        return view('admin.allcourses',compact('courses'));
     }
-}
-public function updatecourse(Request $request, $id)
+
+    public function editcourse($id){
+    $course= Course::findOrFail($id);
+    return view('admin.editcourse',compact('course'));
+    }
+    public function deletecourse($id)
     {
-        $course= Course::findOrFail($id);
-        $data=$request->validate([
-            'id' => 'nullable|integer|unique:courses,id,' . $course->id,
-         'course_id' => [
-                'required',
-                Rule::unique('courses', 'course_id')->ignore($course->id)],
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'icon' => 'nullable|image|mimes',
-            'is_active' => 'required|boolean',
-        ]);
+        $course = Course::find($id);
+        if ($course) {
+            $course->delete();
+            return redirect()->route('allcourses')->with('success', 'Course deleted successfully!');
+        } else {
+            return redirect()->route('allcourses')->with('error', 'Course not found.');
+        }
+    }
+    public function updatecourse(Request $request, $id)
+        {
+            $course= Course::findOrFail($id);
+            $data=$request->validate([
+                'id' => 'nullable|integer|unique:courses,id,' . $course->id,
+            'course_id' => [
+                    'required',
+                    Rule::unique('courses', 'course_id')->ignore($course->id)],
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'is_active' => 'required|boolean',
+            ]);
 
-
-        if ($request->has("icon")) {
-                Storage::delete($course->icon);
-                $data['image'] = Storage::putFile('courseicon', $data['icon']);
+            if ($request->hasFile('icon')) {
+                if($course->icon)
+                { Storage::delete($course->icon);}
+                $data['icon'] = $request->file('icon')->store('courseicon');
             }
 
-        $course->update($data);
-        return redirect(route('allcourses'))->with('success', 'course updated successfully.');
+            // if ($request->has("icon")) {
+            //     if($course->icon)
+            //     { Storage::delete($course->icon);}
+            //     $data['image'] = Storage::putFile('courseicon', $data['icon']);
+            // }
 
+            $course->update($data);
+            return redirect(route('allcourses'))->with('success', 'course updated successfully.');
     }
     public function showAssignCourseForm()
     {
@@ -171,7 +180,6 @@ public function updatecourse(Request $request, $id)
         $courses = Course::all();
         return view('admin.assigncourse', compact('users', 'courses'));
     }
-
     public function assignCourse(Request $request)
     {
         $request->validate([
@@ -196,5 +204,51 @@ public function updatecourse(Request $request, $id)
             return redirect()->back()->with('error', ' the User not found.');
         }
     }
+    public function addlec(){
+        $courses= Course::all();
+        return view('admin.addLec',compact('courses'));
+    }
+    public function uploadlec(Request $request){
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'course_id' => 'required|exists:courses,id',
+            'is_active' => 'required|boolean',
+            'media.*' => 'nullable|file|mimes:pdf,ppt,pptx|max:20480', // 20MB Max for each file
+        ]);
 
-}
+        $course = Course::find($request->course_id);
+        $courseFolder = Str::slug($course->name); // Convert course name to a URL-friendly slug
+
+        $lecture = new Lecture;
+        $lecture->course_id = $request->course_id;
+        $lecture->title = $request->title;
+        $lecture->description = $request->description;
+        $lecture->is_active = $request->is_active;
+
+        if ($request->hasFile('media')) {
+            $files = $request->file('media');
+            $mediaPaths = [];
+
+            foreach ($files as $file) {
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '_' . $originalName . '.' . $extension;
+
+                // Check if directory exists and create if not
+                $directory = "public/{$courseFolder}";
+                if (!Storage::exists($directory)) {
+                    Storage::makeDirectory($directory);
+                }
+
+                $path = $file->storeAs($directory, $filename);
+                $mediaPaths[] = $path; // Store the path in the database
+            }
+
+            $lecture->media = json_encode($mediaPaths); // Store all paths as JSON
+        }
+        $lecture->save();
+
+        return back()->with('success', 'Lecture added successfully!');
+    }
+    }

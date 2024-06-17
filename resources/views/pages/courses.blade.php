@@ -17,6 +17,7 @@
 @endsection
 
 @section('main.style')
+
     <link rel="stylesheet" href="{{ asset('css/courses.css') }}">
 @endsection
 
@@ -55,7 +56,11 @@
             <div class="container ">
                 <div class="row d-flex " dir="{{ $dir }}">
                     <div class=" hover col-lg-6 col-md-12 col-sm-12 position-relative">
-                        <img src="img/Rectangle 11.png" alt="">
+                        @if ($item->course->icon)
+                        <img src="{{ asset('storage/' . $item->course->icon) }}" alt="User Image" >
+                        @else
+                            <img src="img/Rectangle 11.png" alt="">
+                        @endif
                         <div class="hover-img text-center d-flex align-content-center justify-content-center ">
                             <a href="{{ route('course-show-page',$item->course->id) }}">
                                 <button class=" btn  text-center h-25 "> course details</button>

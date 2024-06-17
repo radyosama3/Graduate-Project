@@ -7,6 +7,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\instructorController;
 use App\Models\Course;
+use App\Models\User;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -42,22 +43,31 @@ Route::middleware(['auth','IsStudent'])->group(function () {
 
 
 Route::middleware(['auth', 'IsInstructor'])->group(function () {
-    Route::get('instructor/courses', [instructorController::class,'AllCourses'])->name('instructor-courses-page');
-    Route::get('instructor/profile', [instructorController::class,'profile'])->name('instructor-profile-page');
-    Route::get('instructor/course/{id}', [instructorController::class,'ShowCourse'])->name('instructor-ShowCourse');
+    Route::controller(instructorController::class)->group(function(){
+        Route::get('instructor/courses', 'AllCourses')->name('instructor-courses-page');
+        Route::get('instructor/profile', 'profile')->name('instructor-profile-page');
+        Route::get('instructor/course/{id}','ShowCourse')->name('instructor-ShowCourse');
+        Route::get('grade','AddGrade')->name('instructor_grade');
+        Route::post('/store-grade', 'AddGrade')->name('store-grade');
+
+    });
 });
 
+Route::get('/quiz', function () {
+    return view('pages.quiz');
+})->name('quiz.redirect');
 
-// Route::get('assincourse', function () {
-
-// return view('admin.assigncourse');})->name('assincourse');
-
-Route::get('addlec', function () {
+Route::get('/lecture_upload', function () {
    $courses= Course::all();
-    return view('admin.addLec',compact('courses'));})->name('addlec');
+    return view('instructor.uploadForm',compact('courses'));
+})->name('instrutor_addlec');
+
+
+
+
+
 
 Route::controller(AdminController::class)->group(function(){
-
     Route::get('adduser','adduser')->name('adduser');
     Route::post('addusers','store')->name('store') ;
 
@@ -80,16 +90,8 @@ Route::controller(AdminController::class)->group(function(){
     Route::get('assincourse','showAssignCourseForm')->name('assincourse');
     Route::post('assignCourse','assignCourse')->name('storeassignCourse');
 
+    Route::get('addlec','addlec')->name('addlec');
+    Route::post('uploadlec','uploadlec')->name('uploadlec');
 
 });
 
-
-//group  of route instructor
-// Route::middleware(['auth','is_instructor)->group(function () {
-//     Route::get('/profile', [AuthController::class,'profile'])->name('profile-page');
-//     Route::get('/about', function () {return view('pages.about');})->name('about-page');
-//     Route::get('/contact', function () {return view('pages.contact');})->name('contact-page');
-//     Route::get('/instructor/courses', [CourseController::class,'index'])->name('courses-page');
-//     Route::get('/course/{id}', [CourseController::class,'show'])->name('course-show-page');
-//     Route::get('/grads', [GradeController::class,'index'])->name('grads-page');
-// });

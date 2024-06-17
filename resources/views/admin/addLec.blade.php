@@ -4,10 +4,12 @@
 <div class="main-content" id="addLecture">
 <h2>Add Lecture</h2>
     <br>
+    {{-- {{ route('upload.lecture') }} --}}
+    @include('errors')
+    @include('success')
         <br>
-        {{-- {{ route('upload.lecture') }} --}}
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{route('uploadlec')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="lectureTitle">Lecture Title</label>

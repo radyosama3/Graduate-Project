@@ -20,7 +20,7 @@ class Course extends Model
         'course_id',
         'name',
         'description',
-        'thumbnail',
+        'icon',
         'is_active',
     ];
     protected $casts = [
@@ -36,6 +36,10 @@ class Course extends Model
                     ->withPivot('grade')
                     ->withTimestamps();
     }
- 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
 
 }

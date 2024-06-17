@@ -22,7 +22,8 @@
                 <td>{{ $course->course_id }}</td>
                 <td>{{ $course->name }}</td>
                 <td>{{ $course->description }}</td>
-                <td>{{ $course->icon }}</td>
+                <td><img src="{{ asset('storage/' . $course->icon) }}" alt="course icon" style="width: 100px; height: 100px; border-radius: 30%; object-fit: cover;">
+                </td>
                 <td>
                     @if($course->is_active == 1)
                         Active

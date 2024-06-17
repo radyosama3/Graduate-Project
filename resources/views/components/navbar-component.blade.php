@@ -1,10 +1,10 @@
 <div class="header d-flex justify-content-end ">
-    <i><i class="fa-regular fa-bell p-4 "></i></i>
+    {{-- <i><i class="fa-regular fa-bell p-4 "></i></i> --}}
     <h4 class="p-3"> <a href="{{ route('request.logout') }}" class="btn btn-logout">Logout</a></h4>
     <h4 class="p-3">{{ $auth->name }}</h4>
     <div class="icon">
         @if ($auth->image)
-            <img src="{{$auth->image}}" alt="user image">
+        <img src="{{ asset('storage/' . $auth->image) }}" alt="User Image" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
         @else
             <img src="../img/Ellipse 2.png" alt>
         @endif
@@ -37,12 +37,19 @@
                                             </a>
                                         </li>
                                         @endif
-                                        
+                                        @if (Auth::check() && Auth::user()->type == 'student')
                                         <li class="nav-item ps-5">
                                             <a class="nav-link" href="{{ route('grads-page') }}">
                                                 <h4>Grades</h4>
                                             </a>
                                         </li>
+                                        @elseif (Auth::check() && Auth::user()->type == 'instructor')
+                                        <li class="nav-item ps-5">
+                                            <a class="nav-link" href="{{ route('instructor_grade') }}">
+                                                <h4>Grades</h4>
+                                            </a>
+                                        </li>
+                                        @endif
 
                                         @if (Auth::check() && Auth::user()->type == 'student')
                                         <li class="nav-item ps-5">

@@ -17,11 +17,11 @@
 @endsection
 
 @section('main.style')
-    <link rel="stylesheet" href="{{ asset('css/contact us.css') }}">
+    <link rel="stylesheet" href="{{asset('../../css/contact us.css')}}">
 @endsection
 
 @section('main.script')
-    {{-- // --}}
+
 @endsection
 
 @section('content')

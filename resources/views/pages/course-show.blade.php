@@ -36,19 +36,30 @@
             </div>
         </div><br>
     </div>
-    @php
-        $lectures_count = count($course->lectures);
-        $i = 1;
-        foreach ($course->lectures as $key => $value) {
+    
+    @foreach ($course->lectures as $key => $value)
+    <div class="custom-div">
+        <h4>Lecture {{ $i }} : {{ $value['title'] }}</h4>
+        <h6>Module {{ $i }}\{{ $lectures_count }} complete</h6>
 
-            echo '
-            <div class="custom-div">
-                <h4>Lecture '.$i.' : '.$value['title'].'</h4>
-                <h6>Module '.$i.'\\'.$lectures_count .' complete</h6>
-            </div><br>
-            ';
-            $i++;
-        }
+        @php
+            $mediaFiles = json_decode($value['media'], true);
+        @endphp
+
+        @if (!empty($mediaFiles))
+            <div class="lecture-media">
+                @foreach ($mediaFiles as $file)
+                    @php
+                        $filePath = storage_path('app/' . $file);
+                        $fileName = basename($filePath);
+                    @endphp
+                    <a href="{{ route('download', ['file' => $fileName]) }}" target="_blank">{{ $fileName }}</a><br>
+                @endforeach
+            </div>
+        @endif
+    </div><br>
+    @php $i++; @endphp
+@endforeach
     @endphp
     {{-- @foreach ($course->lectures as $item)
         <div class="custom-div">

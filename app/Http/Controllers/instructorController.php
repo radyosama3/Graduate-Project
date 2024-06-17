@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Models\UserHasCourse;
@@ -47,5 +48,28 @@ class instructorController extends Controller
 
         // return redirect()->back()->with('success', 'File uploaded successfully.');
     }
+    public function AddGrade (){
+        $users=User::all();
+        $courses= Course::all();
+        return  view('instructor.update_grade',compact('users','courses'));
+    }
+    public function storeGrade (Request $request)
+    {
+         // Validate the request
+         $data = $request->validate([
+            // 'course_id' => 'required|exists:courses,id',
+            // 'user_id' => 'required|exists:users,id',
+            'grade' => 'required|min:0|max:100',
+        ]);
+
+        // Store the grade
+        UserHasCourse::updateOrCreate(
+            // ['course_id' => $data['course_id'],
+            // 'user_id' => $data['user_id']],
+            ['grade' => $data['grade']]
+        );
+
+        return redirect()->route('create-grade')->with('success', 'Grade added successfully.');
+        }
 
 }

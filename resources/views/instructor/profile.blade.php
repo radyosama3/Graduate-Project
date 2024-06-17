@@ -30,8 +30,8 @@
         <div class="row ">
             <div class="col-lg-1  ">
                 <div class="img-info ">
-                    @if ($profile->thumbnail)
-                        <img src="{{ $profile->thumbnail }}" alt="user thumbnail">
+                    @if ($profile->image)
+                    <img src="{{ asset('storage/' . $profile->image) }}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                     @else
                         <img src="img/Ellipse 3.png" alt>
                     @endif
@@ -80,7 +80,7 @@
                     <label for="level">
                         <h4>Number</h4>
                     </label>
-                    {{-- <h5 class="level">{{ $profile->number }}</h5> --}}
+                    <h5 class="level">{{ $profile->number }}</h5>
                 </div>
             </div>
         </form>
