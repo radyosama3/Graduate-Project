@@ -63,10 +63,8 @@
             <label for="grade">Grade:</label>
             <input type="number" class="form-control" id="grade" name="grade" step="0.01" min="0" max="100" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add Grade</button>
+        <button type="submit" class="btn btn-primary">Update Grade</button>
     </form>
-
-
 
     {{-- <div class="container-fluid">
         <div class="row1 bg-danger">

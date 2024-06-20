@@ -109,9 +109,9 @@ class AdminController extends Controller
         $courses = Course::all();
         return view('admin.addcourse',compact('courses'));
     }
-    public function storecourse (Request $request)
+    public function storeCourse(Request $request)
     {
-        $data=$request->validate([
+        $data = $request->validate([
             'id' => 'nullable|integer|unique:courses',
             'course_id' => 'required|unique:courses,course_id',
             'name' => 'required|string|max:255',
@@ -119,13 +119,16 @@ class AdminController extends Controller
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'is_active' => 'required|boolean',
         ]);
-        if (isset($data['icon'])) {
-                $data['image'] = Storage::putFile('courseicon', $data['icon']);
+
+        if ($request->hasFile('icon')) {
+            $data['icon'] = $request->file('icon')->store('courseicon');
         }
 
         Course::create($data);
+
         return redirect()->route('addcourse')->with('success', 'Course added successfully.');
-}
+    }
+
     public function allcourses(){
         $courses= Course::all();
         return view('admin.allcourses',compact('courses'));
@@ -208,47 +211,54 @@ class AdminController extends Controller
         $courses= Course::all();
         return view('admin.addLec',compact('courses'));
     }
-    public function uploadlec(Request $request){
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'course_id' => 'required|exists:courses,id',
-            'is_active' => 'required|boolean',
-            'media.*' => 'nullable|file|mimes:pdf,ppt,pptx|max:20480', // 20MB Max for each file
-        ]);
+    public function uploadlec(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'course_id' => 'required|exists:courses,id',
+        'is_active' => 'required|boolean',
+        'media.*' => 'nullable|file|mimes:pdf,ppt,pptx|max:20480', // 20MB Max for each file
+    ]);
 
-        $course = Course::find($request->course_id);
-        $courseFolder = Str::slug($course->name); // Convert course name to a URL-friendly slug
+    $course = Course::find($request->course_id);
+    $courseFolder = Str::slug($course->name);
 
-        $lecture = new Lecture;
-        $lecture->course_id = $request->course_id;
-        $lecture->title = $request->title;
-        $lecture->description = $request->description;
-        $lecture->is_active = $request->is_active;
+    $lecture = new Lecture;
+    $lecture->course_id = $request->course_id;
+    $lecture->title = $request->title;
+    $lecture->description = $request->description;
+    $lecture->is_active = $request->is_active;
 
-        if ($request->hasFile('media')) {
-            $files = $request->file('media');
-            $mediaPaths = [];
+    // Handle file uploads if any
+    if ($request->hasFile('media')) {
+        // Delete old media files
+        
 
-            foreach ($files as $file) {
-                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $extension = $file->getClientOriginalExtension();
-                $filename = time() . '_' . $originalName . '.' . $extension;
+        $files = $request->file('media');
+        $mediaPaths = [];
 
-                // Check if directory exists and create if not
-                $directory = "public/{$courseFolder}";
-                if (!Storage::exists($directory)) {
-                    Storage::makeDirectory($directory);
-                }
+        foreach ($files as $file) {
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '_' . $originalName . '.' . $extension;
 
-                $path = $file->storeAs($directory, $filename);
-                $mediaPaths[] = $path; // Store the path in the database
+            // Check if directory exists and create if not
+            $directory = "public/{$courseFolder}";
+            if (!Storage::exists($directory)) {
+                Storage::makeDirectory($directory);
             }
 
-            $lecture->media = json_encode($mediaPaths); // Store all paths as JSON
+            $path = $file->storeAs($directory, $filename);
+            $mediaPaths[] = $path; // Store the path in the database
         }
-        $lecture->save();
 
-        return back()->with('success', 'Lecture added successfully!');
+        $lecture->media = json_encode($mediaPaths); // Store all paths as JSON
     }
+
+    $lecture->save();
+
+    return redirect()->route('instructor-ShowCourse', $course->id)->with('success', 'Lecture uploaded successfully!');
+}
+
     }

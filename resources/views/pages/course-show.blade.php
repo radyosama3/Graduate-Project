@@ -36,7 +36,48 @@
             </div>
         </div><br>
     </div>
-    
+
+    @php
+    $lectures_count = count($course->lectures);
+    $i = 1;
+@endphp
+
+@foreach ($course->lectures as $key => $value)
+    @if ($value['is_active'] == 1)
+        @php
+            $edit = route('instrutor_addlec', $value['id']); // Adjust the route as needed
+            $deleteLink = route('deletelec', $value['id']);
+            $mediaFiles = json_decode($value['media'], true); // Decode the JSON string to an array
+        @endphp
+        <div class="custom-div" style="margin-bottom: 10px;">
+            <h4>Lecture {{ $i }} : {{ $value['title'] }}</h4>
+            <h4>Description : {{ $value['description'] }}</h4>
+            <h6>Module {{ $i }} / {{ $lectures_count }} complete</h6>
+
+            {{-- Display Media Links --}}
+            @if (!empty($mediaFiles))
+                <div class="media-links">
+                    @foreach ($mediaFiles as $file)
+                        @php
+                            $fileUrl = asset('storage/' . $file); // Generate the correct URL for each media file
+                            $fileName = basename($file); // Extract the file name from the path
+                        @endphp
+                        <a href="{{ $fileUrl }}" target="_blank" style="display: block; margin-bottom: 5px;">View Media</a>
+                    @endforeach
+                </div>
+            @endif
+
+
+        </div><br>
+        @php $i++; @endphp
+    @endif
+
+@endforeach
+<div style="text-align: center;">
+    <a href="{{ route('quiz.redirect', ['course' => $course->id]) }}" class="icon fa-solid fa-upload" style="display: inline-block; padding: 10px; text-decoration: none; color: rgb(0, 0, 0); border-radius: 5px; text-align: center;"> Enter Into Exam </a>
+</div>
+@endsection
+{{--
     @foreach ($course->lectures as $key => $value)
     <div class="custom-div">
         <h4>Lecture {{ $i }} : {{ $value['title'] }}</h4>
@@ -60,12 +101,6 @@
     </div><br>
     @php $i++; @endphp
 @endforeach
-    @endphp
-    {{-- @foreach ($course->lectures as $item)
-        <div class="custom-div">
-            <h4>Lecture 1 : {{ $item->title }}</h4>
-            <h6>module 1. 10\13 complete</h6>
-        </div><br>
-    @endforeach --}}
-    {{-- <x-footer-component /> --}}
-@endsection
+    @endphp --}}
+
+

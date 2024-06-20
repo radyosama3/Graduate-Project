@@ -1,4 +1,7 @@
 <?php
+use App\Models\User;
+use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -6,8 +9,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\instructorController;
-use App\Models\Course;
-use App\Models\User;
+use App\Models\Lecture;
+use App\Models\question;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -39,33 +42,32 @@ Route::middleware(['auth','IsStudent'])->group(function () {
     Route::get('/courses', [CourseController::class,'index'])->name('courses-page');
     Route::get('/course/{id}', [CourseController::class,'show'])->name('course-show-page');
     Route::get('/grads', [GradeController::class,'index'])->name('grads-page');
-});
 
+    Route::get('/course/{course}/quiz', function ($courseId) {
+        $course = Course::findOrFail($courseId);
+        $auth=$this->auth = Auth::user();
+        $questions = Question::where('course_id', $courseId)->get();
+
+        return view('pages.quiz',compact('questions','auth'));
+    })->name('quiz.redirect');
+});
 
 Route::middleware(['auth', 'IsInstructor'])->group(function () {
     Route::controller(instructorController::class)->group(function(){
         Route::get('instructor/courses', 'AllCourses')->name('instructor-courses-page');
         Route::get('instructor/profile', 'profile')->name('instructor-profile-page');
         Route::get('instructor/course/{id}','ShowCourse')->name('instructor-ShowCourse');
-        Route::get('grade','AddGrade')->name('instructor_grade');
-        Route::post('/store-grade', 'AddGrade')->name('store-grade');
 
+        Route::get('grade','AddGrade')->name('instructor_grade');
+        Route::post('/store-grade', 'updategrade')->name('store-grade');
+
+        Route::delete('deletelec/{id}','deletelec')->name('deletelec');
+
+        Route::get('/lecture_edit/{id}','lecture_edit')->name('instrutor_addlec');
+        Route::get('lecture_uploaded/{id}','lecture_uploaded')->name('instrutor_addlecture');
+        Route::put('/updatelec/{id}','updatelec')->name('updatelec');
     });
 });
-
-Route::get('/quiz', function () {
-    return view('pages.quiz');
-})->name('quiz.redirect');
-
-Route::get('/lecture_upload', function () {
-   $courses= Course::all();
-    return view('instructor.uploadForm',compact('courses'));
-})->name('instrutor_addlec');
-
-
-
-
-
 
 Route::controller(AdminController::class)->group(function(){
     Route::get('adduser','adduser')->name('adduser');
