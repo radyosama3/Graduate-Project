@@ -198,7 +198,14 @@ class instructorController extends Controller
                 'course_id' => $course_id,
             ]);
         }
+        $user = Auth::user();
 
-        return redirect()->route('instructor-ShowCourse',$course_id)->with('success', 'Selected questions have been stored successfully.');
+        if ($user->type == 'admin') {
+            return redirect()->route('addlec')->with('success', 'Lecture uploaded successfully!');
+        } elseif ($user->type == 'instructor') {
+            return redirect()->route('instructor-ShowCourse', $course_id)->with('success', 'Lecture uploaded successfully!');
+        } else {
+            return redirect()->route('home')->with('error', 'Unauthorized access.');
+        }
     }
 }

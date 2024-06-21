@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Lecture;
-use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -256,9 +257,13 @@ class AdminController extends Controller
         $lecture->media = json_encode($mediaPaths); // Store all paths as JSON
     }
 
-    $lecture->save();
+        $lecture->save();
+        $user = Auth::user();
 
-    return redirect()->route('instructor-ShowCourse', $course->id)->with('success', 'Lecture uploaded successfully!');
-    }
-
+        if ($user->type == 'admin') {
+            return redirect()->route('addlec')->with('success', 'Lecture uploaded successfully!');
+        } elseif ($user->type == 'instructor') {
+            return redirect()->route('instructor-ShowCourse', $lecture->course_id)->with('success', 'Lecture uploaded successfully!');
+        }
+        }
     }

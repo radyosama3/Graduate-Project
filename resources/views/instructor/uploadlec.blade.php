@@ -44,8 +44,10 @@
                 <label for="lectureCourse">Assign to Course</label>
                 <select id="lectureCourse" name="course_id">
                     @foreach($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->name }}</option>
-                    @endforeach
+                    @if($course->id == $Lecture->course_id)
+                        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
+                    @endif
+                @endforeach
                 </select>
             </div>
 

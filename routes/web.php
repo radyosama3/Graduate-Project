@@ -72,31 +72,33 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
         Route::post('storequiz/{course_id}', 'storequiz' )->name('storequiz');
     });
 });
-
 Route::controller(AdminController::class)->group(function(){
-    Route::get('adduser','adduser')->name('adduser');
-    Route::post('addusers','store')->name('store') ;
-
-    Route::get('showall','showall')->name('allusers');
-    Route::get('users/edit/{id}','editusers')->name('edituser');
-    Route::put('user/update/{id}','updateuser')->name('updateuser');
-
-    Route::delete('deleteuser/{id}','deleteuser')->name('deleteuser');
-    Route::get('addcourse', 'addcourse')->name('addcourse');
-
-
-    Route::get('allcourses','allcourses')->name('allcourses');
-    Route::post('addcourses','storecourse')->name('storecourse') ;
-    Route::get('course/edit/{id}','editcourse')->name('editcourse');
-    Route::put('course/update/{id}','updatecourse')->name('updatecourse');
-
-    Route::delete('deletecourse/{id}','deletecourse')->name('deletecourse');
-
-    Route::get('assincourse','showAssignCourseForm')->name('assincourse');
-    Route::post('assignCourse','assignCourse')->name('storeassignCourse');
-
-    Route::get('addlec','addlec')->name('addlec');
     Route::post('uploadlec','uploadlec')->name('uploadlec');
 
+        Route::middleware(['auth', 'IsAdmin'])->group(function () {
+        Route::get('adduser','adduser')->name('adduser');
+        Route::post('addusers','store')->name('store') ;
+
+        Route::get('showall','showall')->name('allusers');
+        Route::get('users/edit/{id}','editusers')->name('edituser');
+        Route::put('user/update/{id}','updateuser')->name('updateuser');
+
+        Route::delete('deleteuser/{id}','deleteuser')->name('deleteuser');
+        Route::get('addcourse', 'addcourse')->name('addcourse');
+
+
+        Route::get('allcourses','allcourses')->name('allcourses');
+        Route::post('addcourses','storecourse')->name('storecourse') ;
+        Route::get('course/edit/{id}','editcourse')->name('editcourse');
+        Route::put('course/update/{id}','updatecourse')->name('updatecourse');
+
+        Route::delete('deletecourse/{id}','deletecourse')->name('deletecourse');
+
+        Route::get('assincourse','showAssignCourseForm')->name('assincourse');
+        Route::post('assignCourse','assignCourse')->name('storeassignCourse');
+
+        Route::get('addlec','addlec')->name('addlec');
+
+    });
 });
 
