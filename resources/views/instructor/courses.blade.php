@@ -28,6 +28,10 @@
 @section('content')
 <x-navbar-component />
     {{-- <x-navbar-component /> --}}
+   <br>
+   @include('errors')
+   @include('success')
+    <br>
     <div class="container-fluid">
         <div class="row1 bg-danger">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">

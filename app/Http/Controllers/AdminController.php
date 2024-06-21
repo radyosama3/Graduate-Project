@@ -233,7 +233,7 @@ class AdminController extends Controller
     // Handle file uploads if any
     if ($request->hasFile('media')) {
         // Delete old media files
-        
+
 
         $files = $request->file('media');
         $mediaPaths = [];
@@ -259,6 +259,6 @@ class AdminController extends Controller
     $lecture->save();
 
     return redirect()->route('instructor-ShowCourse', $course->id)->with('success', 'Lecture uploaded successfully!');
-}
+    }
 
     }

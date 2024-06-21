@@ -85,7 +85,7 @@
                     <button type="submit" class="icon fa-solid fa-trash"
                             style="display: inline-block; padding: 10px; text-decoration: none;
                                    color: rgb(0, 0, 0); border-radius: 5px; text-align: center;
-                                   background: none; border: none; cursor: pointer;">
+                                   background: none; border: none; cursor: pointer;" onclick="return confirm('Are you sure you want to delete this lecture ?');">
                         Delete
                     </button>
                 </form>
@@ -96,7 +96,7 @@
 @endforeach
 
 
-         <form action="" method="GET">
+         <form action="{{route('uploadquiz',$course->id)}}" method="GET">
             <button type="submit" class="btn d-flex  m-auto">
                 <h4>Add Quiz</h4>
             </button>

@@ -41,8 +41,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <div class="navbar pt-5  ps-5">
             <a class="navbar-brand d-flex align-items-center" >
-                <img width="140" src="../img/Modern.png" alt="">
-                <h2 class="ms-3 mb-0">Modern Academy</h2>
+                <img width="140" src="../img/Modern.png " alt="">
+                    <h2 class="ms-3 mb-0">Modern Academy</h2>
             </a>
 
             <div class="collapse navbar-collapse  ps-5" id="navbarSupportedContent">
@@ -69,23 +69,44 @@
 
 
 
-
-<div class="container">
-        <h1>Exam </h1>
-        <form action="" method="POST">
-
-            <div class="question">
-                @foreach ($questions as $question )
-                <br>
-                <label for="q1">1.{{$question->question_text}}?</label>
-                <input type="text" id="q1" name="q1" required>
-                <br>
-                @endforeach
+    <div class="container">
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
-            <div class="form-group">
-                <button type="submit">Submit Exam</button>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-        </form>
+        @endif
+
+        <h1>Exam</h1>
+
+        @if($questions->isEmpty() || $questions->first()->course_id == null)
+            <p>No questions are available for this exam.</p>
+        @else
+            <form action="{{ route('submitExam') }}" method="POST">
+                @csrf <!-- CSRF token for security -->
+
+                <input type="hidden" name="course_id" value="{{ $questions->first()->course_id }}">
+
+                <div class="question">
+                    @foreach ($questions as $question)
+                        <br>
+                        <label for="q{{ $question->id }}">{{ $loop->iteration }}. {{ $question->question_text }}?</label>
+                        <input type="text" id="q{{ $question->id }}" name="answers[{{ $question->id }}]" required>
+                        <br>
+                    @endforeach
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit Exam</button>
+                </div>
+            </form>
+        @endif
     </div>
+
+
     {{-- <x-footer-component /> --}}
 @endsection

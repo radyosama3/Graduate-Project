@@ -18,12 +18,13 @@
 
 @section('main.style')
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('../../css/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('instructor/css/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('instructor/css/profile.css') }}">
+
 @endsection
 
 @section('main.script')
-    {{-- <script src="{{ asset('../../js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('../../js/courses.js') }}"></script> --}}
+
 @endsection
 
 <x-navbar-component />
@@ -115,7 +116,7 @@
         </section>
     @endforeach
 
-    <div class="div">
+     <div class="div">
         <i class="fa-solid fa-arrow-up" onclick="top()"></i>
         <span class="UP">UP</span>
     </div> --}}

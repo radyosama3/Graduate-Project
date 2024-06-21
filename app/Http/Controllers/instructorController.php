@@ -154,4 +154,51 @@ class instructorController extends Controller
 
         return redirect()->route('instructor-ShowCourse',$course->id)->with('success', 'Lecture updated successfully!');
     }
+    public function uploadquiz($course_id)
+    {
+        // Assuming the questions are stored in an array for this example
+        $questions = [
+            "What is meant by computer ‘hardware’ and ‘software’?",
+            "Where are the programs and files you are currently using held?",
+            "Explain why a printer is hardware and the web browsers Firefox, Chrome and Explorer are all software.",
+            "Where are all programs, including the operating system, and all your files held in a typical computer?",
+            "What is meant by a 'port'?",
+            "Give some examples of the names of some ports you may find on a computer or laptop.",
+            "Explain why a computer needs a hard drive.",
+            "What is a microprocessor?",
+            "List out some computer processors.",
+            "What is a Super-class?",
+            "Explain class variable.",
+            "Explain the meaning of file.",
+            "What is a programming language?",
+            "What is an Integrated Development Environment?",
+            "Distinguish between constructor and method, abstract class and interface."
+        ];
+
+        $course = Course::findOrFail($course_id);
+
+        return view('instructor.uploadquiz', compact('questions', 'course'));
+    }
+    public function storequiz(Request $request, $course_id)
+    {
+        // Validate the request
+        $request->validate([
+            'questions' => 'required|array|min:1',  // Ensure 'questions' is an array with at least one item
+            'questions.*' => 'required|string|max:255',
+        ], [
+            'questions.required' => 'Please select at least one question.',
+            'questions.min' => 'Please select at least one question.',
+        ]);
+
+        $selectedQuestions = $request->input('questions');
+
+        foreach ($selectedQuestions as $questionText) {
+            Question::create([
+                'question_text' => $questionText,
+                'course_id' => $course_id,
+            ]);
+        }
+
+        return redirect()->route('instructor-ShowCourse',$course_id)->with('success', 'Selected questions have been stored successfully.');
+    }
 }

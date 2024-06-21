@@ -17,7 +17,8 @@
 @endsection
 
 @section('main.style')
-    <link rel="stylesheet" href="{{asset('../../css/contact us.css')}}">
+    <link rel="stylesheet" href="{{asset('instructor/css/contact us.css')}}">
+    <link rel="stylesheet" href="{{ asset('instructor/css/profile.css') }}">
 @endsection
 
 @section('main.script')

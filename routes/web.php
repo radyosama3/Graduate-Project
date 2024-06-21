@@ -42,6 +42,7 @@ Route::middleware(['auth','IsStudent'])->group(function () {
     Route::get('/courses', [CourseController::class,'index'])->name('courses-page');
     Route::get('/course/{id}', [CourseController::class,'show'])->name('course-show-page');
     Route::get('/grads', [GradeController::class,'index'])->name('grads-page');
+    Route::post('/submit-exam', [CourseController::class, 'submitExam'])->name('submitExam');
 
     Route::get('/course/{course}/quiz', function ($courseId) {
         $course = Course::findOrFail($courseId);
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
         Route::get('/lecture_edit/{id}','lecture_edit')->name('instrutor_addlec');
         Route::get('lecture_uploaded/{id}','lecture_uploaded')->name('instrutor_addlecture');
         Route::put('/updatelec/{id}','updatelec')->name('updatelec');
+
+        Route::get('uploadquiz/{course_id}','uploadquiz')->name('uploadquiz');
+        Route::post('storequiz/{course_id}', 'storequiz' )->name('storequiz');
     });
 });
 
@@ -73,7 +77,6 @@ Route::controller(AdminController::class)->group(function(){
     Route::get('adduser','adduser')->name('adduser');
     Route::post('addusers','store')->name('store') ;
 
-    // Route::get('alluser','alluser')->name('alluser');
     Route::get('showall','showall')->name('allusers');
     Route::get('users/edit/{id}','editusers')->name('edituser');
     Route::put('user/update/{id}','updateuser')->name('updateuser');

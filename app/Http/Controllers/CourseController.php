@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\answer;
 use App\Models\Course;
-use App\Models\UserHasCourse;
+use App\Models\Lecture;
+use App\Models\question;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\UserHasCourse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -79,4 +84,33 @@ class CourseController extends Controller
     {
         //
     }
-}
+    public function submitExam(Request $request)
+    {
+        $user_id = auth()->id(); // Assuming the user is authenticated
+        $course_id = $request->input('course_id');
+
+        $question_ids = question::where('course_id', $course_id)->pluck('id');
+
+        $existingAnswers = Answer::whereIn('question_id', $question_ids)
+                                  ->where('user_id', $user_id)
+                                  ->exists();
+
+        if ($existingAnswers) {
+            return redirect()->back()->with('error', 'You have already submitted this quiz.');
+        }
+
+        $answers = $request->input('answers');
+
+        foreach ($answers as $question_id => $answer_text) {
+            Answer::create([
+                'answer_text' => $answer_text,
+                'question_id' => $question_id,
+                'user_id' => $user_id,
+            ]);
+        }
+
+        return redirect()->route('redirecto')->with('success', 'Exam submitted successfully!');
+    }
+
+    
+    }

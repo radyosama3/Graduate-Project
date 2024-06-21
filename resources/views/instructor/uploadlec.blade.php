@@ -1,8 +1,9 @@
 @extends('structure')
 @section('main.style')
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/all.min.css">
-    <link rel="stylesheet" href="../../css/doctor.css">
+    <link rel="stylesheet" href="{{asset('instructor/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('instructor/css/profile.css')}}">
+    <link rel="stylesheet" href="{{asset('instructor/css/doctor.css')}}">
 @endsection
 
 @section('pageName')
@@ -15,20 +16,19 @@
         @include('errors')
         @include('success')
         <h2>UpLoad Lecture </h2>
-        <form action="{{route('uploadlec')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('uploadlec') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
-                <label for="title">lecture Title:</label>
-                <input type="text" id="title"  name="title" required>
+                <label for="title">Lecture Title:</label>
+                <input type="text" id="title" name="title" required>
             </div>
 
             <div>
                 <label for="description">Description:</label>
-                <textarea id="description" name="description"  required></textarea>
+                <textarea id="description" name="description" required></textarea>
             </div>
 
-            <div >
-
+            <div>
                 <label for="file">Attach File:</label>
                 <input type="file" id="media" name="media[]" accept="image/*,.pdf,.ppt,.pptx" multiple>
             </div>
@@ -44,15 +44,14 @@
                 <label for="lectureCourse">Assign to Course</label>
                 <select id="lectureCourse" name="course_id">
                     @foreach($courses as $course)
-                    @if($course->id == $Lecture->course_id)
-                        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
-                    @endif
-                @endforeach
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
-            <input type="submit" value="Uploud Assignment">
+            <input type="submit" value="Upload Assignment">
         </form>
+
 
 
 

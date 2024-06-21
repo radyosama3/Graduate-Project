@@ -29,6 +29,8 @@
 @section('content')
     <x-navbar-component />
     <div class="container-fluid">
+        @include('errors')
+        @include('success')
         <div class="row1 bg-danger">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="home-sec">

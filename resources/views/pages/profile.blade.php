@@ -60,6 +60,10 @@
                         <h4>Email</h4>
                     </label>
                     <h5 class="Email">{{ $profile->email }}</h5><br>
+                    <label for="type">
+                        <h4>type:</h4>
+                    </label>
+                    <h5 class="Email">{{ $profile->type }}</h5><br>
                     <label for="level">
                         <h4>level:</h4>
                     </label>
