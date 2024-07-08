@@ -65,7 +65,7 @@ Route::middleware(['auth', 'IsInstructor'])->group(function () {
         Route::delete('deletelec/{id}','deletelec')->name('deletelec');
 
         Route::get('/lecture_edit/{id}','lecture_edit')->name('instrutor_addlec');
-        Route::get('lecture_uploaded/{id}','lecture_uploaded')->name('instrutor_addlecture');
+        Route::get('/lecture_uploaded/{id}','lecture_uploaded')->name('instrutor_addlecture');
         Route::put('/updatelec/{id}','updatelec')->name('updatelec');
 
         Route::get('uploadquiz/{course_id}','uploadquiz')->name('uploadquiz');

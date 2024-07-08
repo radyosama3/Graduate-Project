@@ -44,6 +44,7 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $request->validate([
+            'user_id'=>'required|unique:users,user_id',
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
@@ -51,6 +52,7 @@ class AuthController extends Controller
 
         // Create a new user account
         $user = User::create([
+            'user_id'=>$request['user_id'],
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),

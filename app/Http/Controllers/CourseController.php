@@ -109,8 +109,8 @@ class CourseController extends Controller
             ]);
         }
 
-        return redirect()->route('redirecto')->with('success', 'Exam submitted successfully!');
+        return redirect()->route('courses-page')->with('success', 'Exam submitted successfully!');
     }
 
-    
+
     }

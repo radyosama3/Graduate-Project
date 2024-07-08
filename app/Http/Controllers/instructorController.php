@@ -9,6 +9,7 @@ use App\Models\Question;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\UserHasCourse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,7 +41,7 @@ class instructorController extends Controller
         return view ('instructor.ShowCourse',compact('course'));
     }
     public function AddGrade (){
-        $users = User::where('type', 'student')->get();
+        $users = DB::table('users')->where('type', 'student')->get();
         $courses= Course::all();
         return  view('instructor.update_grade',compact('users','courses'));
     }
@@ -94,7 +95,7 @@ class instructorController extends Controller
     }
     public function lecture_uploaded($id){
         $courses= Course::all();
-        $Lecture=Lecture::findOrFail($id);
+        $Lecture=Lecture::find($id);
         return view('instructor.uploadlec',compact('courses','Lecture'));
     }
     public function updatelec(Request $request, $id)
@@ -183,7 +184,7 @@ class instructorController extends Controller
     {
         // Validate the request
         $request->validate([
-            'questions' => 'required|array|min:1',  // Ensure 'questions' is an array with at least one item
+            'questions' => 'required|array|min:1',
             'questions.*' => 'required|string|max:255',
         ], [
             'questions.required' => 'Please select at least one question.',
@@ -204,8 +205,6 @@ class instructorController extends Controller
             return redirect()->route('addlec')->with('success', 'Lecture uploaded successfully!');
         } elseif ($user->type == 'instructor') {
             return redirect()->route('instructor-ShowCourse', $course_id)->with('success', 'Lecture uploaded successfully!');
-        } else {
-            return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
     }
 }

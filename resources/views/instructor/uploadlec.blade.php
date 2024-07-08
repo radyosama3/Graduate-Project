@@ -43,11 +43,18 @@
             <div class="form-group">
                 <label for="lectureCourse">Assign to Course</label>
                 <select id="lectureCourse" name="course_id">
+                    <option value="" disabled selected>Select a course</option> <!-- Placeholder option -->
+
                     @foreach($courses as $course)
-                    @if($course->id == $Lecture->course_id)
-                        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
-                    @endif
-                @endforeach
+                        @if($Lecture === null)
+                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                        @else
+                            <option value="{{ $course->id }}" {{ $course->id == $Lecture->course_id ? 'selected' : '' }}>
+                                {{ $course->name }}
+                            </option>
+                        @endif
+                    @endforeach
+
                 </select>
             </div>
 

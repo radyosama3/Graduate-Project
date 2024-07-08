@@ -62,7 +62,7 @@
         <div class="custom-div" style="margin-bottom: 10px;">
             <h4>Lecture {{ $i }} : {{ $value['title'] }}</h4>
             <h4>Description : {{ $value['description'] }}</h4>
-            <h6>Module {{ $i }} / {{ $lectures_count }} complete</h6>
+            <h6>Module {{ $i }} / {{ $lectures_count }} </h6>
 
             {{-- Display Media Links --}}
             @if (!empty($mediaFiles))
@@ -102,7 +102,7 @@
             </button>
         </form>
         {{--  --}}
-        <form action="{{ route('instrutor_addlecture',$value['id']) }}" method="GET">
+        <form action="{{route('instrutor_addlecture',$course->id)}}" method="GET">
             <button type="submit" class="btn d-flex  m-auto">
                 <h4>Add new lecture</h4>
             </button>

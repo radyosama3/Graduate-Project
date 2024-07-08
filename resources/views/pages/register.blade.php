@@ -30,6 +30,7 @@
         <form action="{{ route('request.register') }}" method="POST" class="registration-form" id="registrationForm">
             @csrf
             <h2>Register for College</h2>
+            <input type="text" name="user_id" placeholder="user id" id="user_id" required autocomplete="off">
             <input type="text" name="name" placeholder="Full_Name" id="name" required autocomplete="off">
             <input type="email" name="email"  placeholder="Email Address" id="email" required autocomplete="off">
             <input type="password" name="password"  placeholder="Password" id="password" required autocomplete="off">
